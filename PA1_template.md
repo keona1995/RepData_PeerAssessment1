@@ -125,6 +125,7 @@ fillNAsWithMeans <- function(df1, df2) {
     df1
 }
 
+totalNAs <- sum(is.na(df[,1]))
 df2 <- fillNAsWithMeans(df1,avg)
 dategrp <- group_by(df2, date)
 sum2 <- summarize(dategrp, stepsperday = sum(steps))
@@ -140,6 +141,7 @@ avgdailystepsimputed <- mean(sum2$stepsperday)
 mediandailystepsimputed <- median(sum2$stepsperday)
 ```
 
+Before imputing values, the number of observations with missing values was 2304.
 The effect of imputing data was to raise the mean of the step count per day. In the first analysis where missing values were ignored, the mean was 9354.23. In this second analysis with imputed values, the mean was about 10581. The median was the same in both analyses, with a value of 10395.
 
 
@@ -184,11 +186,11 @@ par(mfrow=c(1,2), mar = c(4,4,2,1), oma = c(0,0,2,0))
 
 plot(weekendavg$minutes,weekendavg$stepavg,type="l", xlim=c(-1,1440),
      ylab="Steps last 5 min.",xlab="Minute of the Day",
-     main="Avg. Step Values for Weekends",cex.main=1.2)
+     main="Avg. Step Values - Weekends",cex.main=1.2)
 
 plot(weekdayavg$minutes, weekdayavg$stepavg,type="l",xlim=c(-1,1440),
      ylab="Steps last 5 min.", xlab="Minute of the Day",
-     main="Avg. Step Values for Weekdays",cex.main=1.2)
+     main="Avg. Step Values - Weekdays",cex.main=1.2)
 
 mtext("Activity for Weekends and Weekdays", outer=TRUE, cex=1.5)
 ```

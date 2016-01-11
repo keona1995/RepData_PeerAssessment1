@@ -85,6 +85,7 @@ fillNAsWithMeans <- function(df1, df2) {
     df1
 }
 
+totalNAs <- sum(is.na(df[,1]))
 df2 <- fillNAsWithMeans(df1,avg)
 dategrp <- group_by(df2, date)
 sum2 <- summarize(dategrp, stepsperday = sum(steps))
@@ -95,6 +96,7 @@ avgdailystepsimputed <- mean(sum2$stepsperday)
 mediandailystepsimputed <- median(sum2$stepsperday)
 ```
 
+Before imputing values, the number of observations with missing values was `r totalNAs`.
 The effect of imputing data was to raise the mean of the step count per day. In the first analysis where missing values were ignored, the mean was `r round(avgdailysteps,2)`. In this second analysis with imputed values, the mean was about `r as.integer(avgdailystepsimputed)`. The median was the same in both analyses, with a value of `r as.integer(mediandailystepsimputed)`.
 
 
